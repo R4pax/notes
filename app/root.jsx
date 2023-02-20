@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from "@remix-run/react";
 
 import styles from "./styles/main.css";
@@ -28,6 +29,34 @@ export default function App() {
           <MainNavigation />
         </header>
         <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+// ловит ответы с бека с ошибками
+export function CatchBoundary() {
+  const caughtResponse = useCatch();
+  const message = caughtResponse.data?.message || "Data not found";
+
+  return (
+    <html lang="en">
+      <head>
+        <Meta />
+        <Links />
+        <title>Error</title>
+      </head>
+      <body>
+        <header>
+          <MainNavigation />
+        </header>
+        <main className="error">
+          <h1>An Error occured!</h1>
+          <p>{error.message}</p>
+        </main>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

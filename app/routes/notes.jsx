@@ -53,6 +53,12 @@ export async function action({ request }) {
   return redirect("/notes");
 }
 
+// тут определяем мета теги для страницы
+export const meta = () => ({
+  title: "Notes",
+});
+
+// тут подключаем стили для страницы
 export function links() {
   return [...newNoteLinks(), ...noteListLinks()];
 }
